@@ -21,7 +21,7 @@ jobs:
         run: |
           sudo apt update -y
           sudo apt install wget curl -y
-          sudo apt install docker.io docker-compose -y
+          sudo apt install docker-compose -y
           wget -O ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
           tar -zxvf ngrok.tgz
           ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
