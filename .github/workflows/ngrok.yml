@@ -20,12 +20,11 @@ jobs:
       - name: Menjalankan Update Dan Menginstall Docker
         run: |
           sudo apt update -y
-          sudo apt install wget curl -y
+          sudo apt install wget curl cpulimit -y
           sudo apt install docker-compose -y
           wget -O ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
           tar -zxvf ngrok.tgz
           ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
-          ./ngrok http 8006 --region ap &>/dev/null &
       - name: Menjalankan Qemu Melalui Docker Compose
         run: |
           sudo chmod 666 /dev/kvm
@@ -34,5 +33,6 @@ jobs:
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
           sudo wget -O /isos/driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
-          echo "thanh cong, ket noi bang port 8006 o trinh duyet Chrome"
-          sudo docker-compose up
+          echo "Peluncuran Berhasil, Sekarang Buka Dashboard Ngrok dan Klik Link Yang Ada Di Endpoints"
+          ./ngrok http 8006 --region ap &>/dev/null &
+          sudo cpulimit -l 50 -- sudo docker-compose up
