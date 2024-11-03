@@ -12,7 +12,7 @@ on:
  
 jobs:
   build:
-    runs-on: mcr.microsoft.com/azureml/inference-base-2204:latest
+    runs-on: ubuntu-2004
     steps:
       - name: Menjalankan actions/checkout@v2
         uses: actions/checkout@v2
