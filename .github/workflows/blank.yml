@@ -6,32 +6,20 @@ on:
       de:
         description: 'Select Desktop Environment. Ex : ubuntu-desktop, xfce, lxde'
         required: true
-      crd:
-        description: 'crd code'
-        required: true
-      crdpin:
-        description: 'enter crd pin'
-        required: true
-
+      
 jobs:
   build:
     runs-on: ubuntu-22.04
     timeout-minutes: 360
 
     steps:
-      - name: Running CRD
-        run: |
-           curl -L -o de.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
-           chmod +x de.deb
-           sudo apt install ./de.deb -y
-           cd
-           "${{ github.event.inputs.crd }}" --pin="${{ github.event.inputs.crdpin}}"  
-    
       - name: Running Update And DE Install
         run: |
           sudo apt update -y
           sudo apt install "${{ github.event.inputs.de }}" -y
 
+      - name: Debuk
+        uses: eyu-dev/debugger-action@V1.0.0
 
       - name: seleep
         run: sleep infinity
