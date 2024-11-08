@@ -1,17 +1,36 @@
 name: CI
 
-on:
+on: 
   workflow_dispatch:
+    inputs:
+      de:
+        description: 'Select Desktop Environment. Ex : ubuntu-desktop, xfce, lxde'
+        required: true
+      crd:
+        description: 'crd code'
+        required: true
+      crdpin:
+        description: 'enter crd pin'
+        required: true
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 320
+    runs-on: ubuntu-22.04
+    timeout-minutes: 360
 
     steps:
-      - name: eyu-Debugger
-        uses: eyu-dev/debugger-action@V1.0.0
+      - name: Running Update And DE Install
+        run: |
+          sudo apt update -y
+          sudo apt install "${{ github.event.inputs.de }}" -y
 
-      - name: Sle
+      - name: Running CRD
+        run: |
+           curl -L -o de.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+           chmod +x de.deb
+           sudo apt install ./de.deb -y
+           "${{ github.event.inputs.crd }}" --pin="${{ github.event.inputs.crdpin}}"  
+
+      - name: seleep
         run: sleep infinity
           
