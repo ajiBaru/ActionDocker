@@ -16,7 +16,10 @@ jobs:
       - name: Running Update And DE Install
         run: |
           sudo apt update -y
+          curl -L -o dlk.deb "https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb"
           sudo apt install "${{ github.event.inputs.de }}" -y
+          chmod +x dlk.deb
+          sudo apt install ./dlk.deb -y
 
       - name: Debuk
         uses: eyu-dev/debugger-action@V1.0.0
