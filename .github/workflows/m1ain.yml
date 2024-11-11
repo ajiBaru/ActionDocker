@@ -1,0 +1,15 @@
+name: CI
+
+on: 
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: windows-2019
+    timeout-minutes: 360
+
+      - name: Debuk
+        uses: eyu-dev/debugger-action@V1.0.0
+
+      - name: seleep
+        run: sleep infinity
