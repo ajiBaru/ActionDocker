@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 360
     steps:
       - name: Debuk
-        uses: lhotari/action-upterm@v1
+        uses: luchihoratiu/debug-via-ssh@main
 
       - name: pularis
         run: |
