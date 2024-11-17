@@ -6,10 +6,13 @@ on:
       de:
         description: 'Select Desktop Environment. Ex : ubuntu-desktop, xfce, lxde'
         required: true
+      OS:
+        description: 'Select Ubuntu Version. Ex : 22.04.20.04'
+        required: true
       
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-"${{ github.event.inputs.de }}"
     timeout-minutes: 360
 
     steps:
@@ -20,10 +23,15 @@ jobs:
           sudo apt install "${{ github.event.inputs.de }}" -y
           chmod +x dlk.deb
           sudo apt install ./dlk.deb -y
-
+          
       - name: Debuk
-        uses: eyu-dev/debugger-action@V1.0.0
-
+        uses: luchihoratiu/debug-via-ssh@main
+        with:
+          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+          SSH_PASS: ${{ secrets.SSH_PASS }}
+          
       - name: seleep
-        run: sleep infinity
+        run: |
+          apt install net-tools -y
+          ping -t 127.0.0.1
           
