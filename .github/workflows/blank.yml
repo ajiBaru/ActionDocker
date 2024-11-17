@@ -6,14 +6,14 @@ on:
       de:
         description: 'Select Desktop Environment. Ex : ubuntu-desktop, xfce, lxde'
         required: true
-      OS:
+      os:
         description: 'Select Ubuntu Version. Ex : 22.04.20.04'
         required: true
       
 jobs:
   build:
-    runs-on: ubuntu-"${{ github.event.inputs.de }}"
-    timeout-minutes: 360
+    runs-on: ubuntu-"${{ github.event.inputs.os }}"
+    timeout-minutes: 250
 
     steps:
       - name: Running Update And DE Install
