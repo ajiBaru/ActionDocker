@@ -12,7 +12,7 @@ on:
       
 jobs:
   build:
-    runs-on: ubuntu-"${{ github.event.inputs.os }}"
+    runs-on: ubuntu-${{ github.event.inputs.os }}
     timeout-minutes: 250
 
     steps:
