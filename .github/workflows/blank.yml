@@ -32,6 +32,6 @@ jobs:
           
       - name: seleep
         run: |
-          apt install net-tools -y
+          sudo apt install net-tools -y
           ping -t 127.0.0.1
           
